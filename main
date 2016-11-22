@@ -1,0 +1,160 @@
+<meta charset=utf-8 />
+<title>stack</title>
+<body>
+<html>
+
+<form>
+<input id="pushItem" type="text" placeholder="string to reverse" /> <input type="button" value="reverse" onclick="showIt()" />
+</form>
+
+		<table id="table3">
+		<tr id="row1"> </tr>
+		</table>
+
+       <table id="table1">
+		<tr id="row1"> </tr>
+		</table>
+		
+		<div id="second"> </div>
+		<table id="table2">
+		<tr id="row2"> </tr>
+		</table>
+		
+		
+ <div id="display1"></div>
+ 
+<script >
+   
+  // var messageBox  = document.getElementById("display");
+   var dataStore=[];
+   var outPrint=[];
+     var inputItem = document.getElementById("pushItem");
+ var displayArea= document.getElementById("display1");
+  var secondRow= document.getElementById("row2");
+  var displayArea1= document.getElementById("second"); 
+   
+
+
+   function clearAndShow () {
+   var pushItem  = document.getElementById("pushItem").value;
+   var subString= pushItem.split("");
+   
+   
+   
+   displayArea1.innerHTML="reversed string";
+  
+     
+   
+	 for (i=0; i<subString.length; i++ )
+	 {
+	 
+	 dataStore.push(subString[i]);
+	 }
+	  
+	 createRow1();
+ }   //end of clearAndShow
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+  function createRow1(){        //function to create a row of cells with the entered string values
+  var row = document.getElementById("row1");
+
+   for (var i=0;i<dataStore.length;i++){
+	var x = row.insertCell(-1);
+	x.innerHTML = dataStore[i];
+	x.style.border = "1px solid black";
+	x.style.width="50px";
+	}
+	
+	generateRow();	// create row 2
+	removeCells();  // remove cells created by function createRow1()
+}
+
+
+  function removeCells(){   //remove the cells from the created row from the end
+	
+	var c= dataStore.length-1;
+    var i= setInterval(
+	function(){
+	var row = document.getElementById("row1");
+	var x = row.deleteCell(c);
+	
+	c--;
+	if (c<0) {
+	clearInterval(i)
+	}
+	
+	},1000);
+}
+	
+  
+  
+  function generateRow(){       //create the table rows displaying the string reverse
+  
+       var c = 0;
+	   var d= dataStore.length-1;
+
+	
+	var i= setInterval(  
+	function(){
+	var row = document.getElementById("row2");
+	var x = row.insertCell(c);
+	var row1 = document.getElementById("row1");
+	outPrint[c] = row1.cells[d-c].innerHTML;
+	x.innerHTML = outPrint[c]; 
+	x.style.border = "1px solid black";
+	x.style.width="50px";
+	c++;
+	if (c>d) {
+	clearInterval(i)
+	}
+	
+	},1000);
+	
+	
+  }
+ 
+   function clearIt(){
+     dataStore.length=0;
+     outPrint.length=0;
+	 inputItem.value="";
+   }
+   
+ 
+ function showIt(){ // call all the functions
+
+ 
+ if(inputItem.value==""){ //check if input is empty
+  secondRow.innerHTML="";
+  displayArea1.innerHTML="";
+  displayArea.innerHTML="no string to reverse";
+ 
+ 
+ } 
+ else // execute the functions if not empty
+ {
+  secondRow.innerHTML="";
+  displayArea1.innerHTML="";
+  displayArea.innerHTML="";
+ inputItem.innerHTML="";
+  clearAndShow();
+
+   clearIt();
+    
+   }
+   
+ 
+   }
+   
+   </script>
+   </body>
+   </html>
+   
+   
+   
+   
